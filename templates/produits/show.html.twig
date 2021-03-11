@@ -13,8 +13,8 @@
                 {% if produit.evaluations - i <= 0.5 %}
                     <img class="w-5 inline-block" src="{{ app.request.uri ~ '/../../img/demi-star.png' }}">
                 {% else %}
-                    {% set counter = i -  produit.evaluations %}
-                    {# Afficher étoiles grisess
+                    {#{% set counter = i - produit.evaluations %}
+                     #}{#Afficher étoiles grisess#}{#
 
                     {% if counter < -0.5 %}
                         <img class="w-5 inline-block" src="{{ app.request.uri ~ '/../../img/no-star.png' }}">
@@ -36,6 +36,13 @@
         {% else %}
             <h2 class="text-xl proportional-nums font-mono text-green-500">En stock</h2>
         {% endif %}
+
+        {% if produit.quantite > 0 %}
+            <div class="block">
+                <button type="submit" class="bg-gradient-to-r from-blue-300 to-blue-500 border-0 rounded-xl py-4 px-6 shadow-2xl mt-3 hover:bg-gradient-to-r hover='from-blue-500 to-light-blue-300' place-self-center">Acheter maintenant</button>
+                <button type="submit" class="border-solid border-4 border-blue-500 text-blue-500 rounded-xl py-3 px-6 shadow-2xl mt-3 place-self-center">Ajouter au panier</button>
+            </div>
+            {% endif %}
     </div>
 
 {% endblock %}
