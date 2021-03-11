@@ -195,6 +195,11 @@ class Produits
     private array $images;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    /**
      * @return array
      */
     public function getImages(): array
@@ -208,5 +213,17 @@ class Produits
     public function setImages(array $images): void
     {
         $this->images = $images;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
     }
 }
