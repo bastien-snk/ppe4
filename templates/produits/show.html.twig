@@ -4,33 +4,38 @@
 
     <div id="produit" class="uppercase font-ubuntu font-semibold">
         <div><a class="float-left" href="{{ path('accueil') }}">⬅️ Retour</a></div><br>
-        <img class="w-80 float-left" src="{{ app.request.uri ~ "/../../img/produits/" ~ produit.image ~ produit.images|first }}" />
-        <h1 class="text-3xl">{{ produit.nomproduit }}</h1>
-        <h2 class="text-xl proportional-nums font-mono text-blue-400">{{ produit.prix }}€</h2>
+        <img class="w-80 float-left rounded-3xl" src="{{ app.request.uri ~ "/../../img/produits/" ~ produit.image ~ produit.images|first }}" />
+        <h1 class="text-2xl">{{ produit.nomproduit }}</h1>
+        <h2 class="text-2xl proportional-nums font-mono text-blue-400">{{ produit.prix }}€</h2>
 
-        {% if produit.quantite < 10 %}
-            <h2 class="text-xl proportional-nums font-mono bg-gradient-to-r from-red-500">{{ produit.quantite }} restants !</h2>
-        {% else %}
-
-        {% endif %}
-        <tr>
-            <th>Quantite</th>
-            <td>{{ produit.quantite }}</td>
-        </tr>
-        <tr>
-            <th>Evaluations</th>
+        {% if produit.evaluations > 0 %}
             {%  for i in 0..produit.evaluations|round(0, 'floor') %}
-                {% if produit.evaluations >= 5 %}
-                    {% set break = true %}
-                {% endif %}
                 {% if produit.evaluations - i <= 0.5 %}
                     <img class="w-5 inline-block" src="{{ app.request.uri ~ '/../../img/demi-star.png' }}">
-                {%  else %}
+                {% else %}
+                    {% set counter = i -  produit.evaluations %}
+                    {# Afficher étoiles grisess
+
+                    {% if counter < -0.5 %}
+                        <img class="w-5 inline-block" src="{{ app.request.uri ~ '/../../img/no-star.png' }}">
+                    {% endif %}#}
                     <img class="w-5 inline-block" src="{{ app.request.uri ~ '/../../img/star.png' }}">
                 {% endif %}
             {% endfor %}
-            <td>{{ produit.evaluations }}</td>
-        </tr>
+        {% else %}
+            {% for i in 0..5 %}
+                <img class="w-5 inline-block" src="{{ app.request.uri ~ '/../../img/no-star.png' }}">
+            {% endfor %}
+        {% endif %}
+        {% if produit.quantite < 10 %}
+            {% if produit.quantite == 0 %}
+                <h2 class="text-xl proportional-nums font-mono text-red-500">Stock épuisé !</h2>
+            {% else %}
+                <h2 class="text-xl proportional-nums font-mono text-yellow-500">{{ produit.quantite }} restants !</h2>
+            {% endif %}
+        {% else %}
+            <h2 class="text-xl proportional-nums font-mono text-green-500">En stock</h2>
+        {% endif %}
     </div>
 
 {% endblock %}
