@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Categories;
 use App\Entity\Produits;
 use App\Form\ProduitsType;
+use App\Manager\ProduitManager;
 use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,14 +20,11 @@ class ProduitsController extends AbstractController
     /**
      * @Route("/", name="produits_index", methods={"GET"})
      */
-    public function index(): Response
+    public function index(ProduitRepository $produitRepository): Response
     {
-        $produits = $this->getDoctrine()
-            ->getRepository(Produits::class)
-            ->findAll();
 
         return $this->render('produits/index.html.twig', [
-            'produits' => $produits,
+            'produits' => ProduitManager::getProducts($produitRepository),
         ]);
     }
 
@@ -56,10 +54,10 @@ class ProduitsController extends AbstractController
     /**
      * @Route("/{idproduit}", name="produits_show", methods={"GET"})
      */
-    public function show(Produits $produit): Response
+    public function show(Produits $produit, ProduitRepository $produitRepository): Response
     {
         return $this->render('produits/show.html.twig', [
-            'produit' => $produit,
+            'produit' => ProduitManager::getProduct($produit),
         ]);
     }
 

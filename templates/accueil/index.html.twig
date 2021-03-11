@@ -3,7 +3,7 @@
 {% block body %}
     <div id="produits" {#class="justify"#}>
         {% for produit in produits %}
-            <div class="flex flex-col justify-center items-center max-w-sm mx-auto my-8">
+            <div onclick="location.href='{{ app.request.uri ~ "produits/"~ produit.idProduit }}'" class="cursor-pointer flex flex-col justify-center items-center max-w-sm mx-auto my-8">
                 <div style="background-image: url({{ app.request.uri ~ "img/produits/" ~ produit.image ~ produit.images|first }})"
                      class="h-64 w-full rounded-lg shadow-md bg-cover bg-center"></div>
                 <div class="w-56 md:w-64 bg-white -mt-10 shadow-lg rounded-lg overflow-hidden">

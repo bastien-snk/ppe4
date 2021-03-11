@@ -32,4 +32,15 @@ class ProduitManager {
         return $products;
     }
 
+    public static function getProduct(Produits $product) {
+        $dir = getcwd() . "/img/produits/" . $product->getImage();
+        $folder = scandir($dir);
+        $images = array();
+        foreach($folder as $image) {
+            if(str_ends_with($image, ".png") || str_ends_with($image, ".jpg")) array_push($images, $image);
+        }
+        $product->setImages($images);
+        return $product;
+    }
+
 }
