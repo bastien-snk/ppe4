@@ -1,0 +1,19 @@
+{% include 'base.html.twig' %}
+
+{% block body %}
+    <div id="produits" {#class="justify"#}>
+        {% for produit in produits %}
+            <div class="flex flex-col justify-center items-center max-w-sm mx-auto my-8">
+                <div style="background-image: url({{ app.request.uri ~ "img/produits/" ~ produit.image ~ produit.images|first }})"
+                     class="h-64 w-full rounded-lg shadow-md bg-cover bg-center"></div>
+                <div class="w-56 md:w-64 bg-white -mt-10 shadow-lg rounded-lg overflow-hidden">
+                    <div class="py-2 text-center font-bold uppercase tracking-wide text-gray-800">{{ produit.nomProduit }}</div>
+                    <div class="flex items-center justify-between py-2 px-3 bg-gradient-to-r to-blue-300 from-blue-500">
+                        <h1 class="text-white font-bold ">{{ produit.prix }}€</h1>
+                        <button class=" bg-gray-300 text-xs text-gray-900 px-2 py-1 font-semibold rounded uppercase hover:bg-gray-700 hover:text-white">Ajouter au panier</button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
