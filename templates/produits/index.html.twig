@@ -3,41 +3,22 @@
 {% block title %}Produits index{% endblock %}
 
 {% block body %}
-    <h1>Produits index</h1>
+    <div id="produits" {#class="justify"#}>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Idproduit</th>
-                <th>Prix</th>
-                <th>Nomproduit</th>
-                <th>Quantite</th>
-                <th>Image</th>
-                <th>Evaluations</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for produit in produits %}
-            <tr>
-                <td>{{ produit.idproduit }}</td>
-                <td>{{ produit.prix }}</td>
-                <td>{{ produit.nomproduit }}</td>
-                <td>{{ produit.quantite }}</td>
-                <td>{{ produit.image }}</td>
-                <td>{{ produit.evaluations }}</td>
-                <td>
-                    <a href="{{ path('produits_show', {'idproduit': produit.idproduit}) }}">show</a>
-                    <a href="{{ path('produits_edit', {'idproduit': produit.idproduit}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('produits_new') }}">Create new</a>
+        <div class="grid grid-flow-line {% if produits|length < 6 %} grid-cols-{{ produits|length }} {% else %} grid-cols-6 {% endif %} grid-rows-3 gap-4">
+            {% for produit in produits %}
+                <div onclick="location.href='{{ path("produits_show", {'idproduit': produit.idproduit}) }}'" class="hover:animate-bounce cursor-pointer flex flex-col justify-center items-center max-w-sm mx-auto my-8">
+                    <div style="background-image: url({{ app.request.uri ~ "img/produits/" ~ produit.image ~ produit.images|first }})"
+                         class="h-64 w-full rounded-lg shadow-md bg-cover bg-center"></div>
+                    <div class="w-56 md:w-64 bg-white -mt-10 shadow-lg rounded-lg overflow-hidden">
+                        <div class="py-2 text-center font-bold uppercase tracking-wide text-gray-800">{{ produit.nomproduit }}</div>
+                        <div class="flex items-center justify-between py-2 px-3 bg-gradient-to-r to-blue-300 from-blue-500">
+                            <h1 class="text-white font-bold ">{{ produit.prix }}€</h1>
+                            <button class=" bg-gray-300 text-xs text-gray-900 px-2 py-1 font-semibold rounded uppercase hover:bg-gray-700 hover:text-white">Ajouter au panier</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

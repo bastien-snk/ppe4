@@ -21,28 +21,35 @@ class Produits
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idproduit;
+    public $idproduit;
 
     /**
      * @var string
      *
      * @ORM\Column(name="prix", type="decimal", precision=15, scale=2, nullable=false)
      */
-    private $prix;
+    public $prix;
 
     /**
      * @var string
      *
      * @ORM\Column(name="nomProduit", type="string", length=50, nullable=false)
      */
-    private $nomproduit;
+    public $nomproduit;
 
     /**
      * @var int|null
      *
      * @ORM\Column(name="quantite", type="integer", nullable=true)
      */
-    private $quantite;
+    public $quantite;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(name="description", type="text", length=65535, nullable=true)
+     */
+    public $description;
 
     /**
      * @var string|null
@@ -56,7 +63,7 @@ class Produits
      *
      * @ORM\Column(name="evaluations", type="float", precision=10, scale=0, nullable=false)
      */
-    private $evaluations;
+    public $evaluations;
 
     /**
      * @var \Categories
@@ -66,7 +73,7 @@ class Produits
      *   @ORM\JoinColumn(name="idCategorie", referencedColumnName="idCategorie")
      * })
      */
-    private $idcategorie;
+    public $idcategorie;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -81,7 +88,7 @@ class Produits
      *   }
      * )
      */
-    private $idvente;
+    public $idvente;
 
     /**
      * Constructor
@@ -89,6 +96,36 @@ class Produits
     public function __construct()
     {
         $this->idvente = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public array $images;
+
+    /**
+     * @return array
+     */
+    public function getImages(): array
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param array $images
+     */
+    public function setImages(array $images): void
+    {
+        $this->images = $images;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
     }
 
     public function getIdproduit(): ?int
@@ -132,14 +169,14 @@ class Produits
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getDescription(): ?string
     {
-        return $this->image;
+        return $this->description;
     }
 
-    public function setImage(?string $image): self
+    public function setDescription(?string $description): self
     {
-        $this->image = $image;
+        $this->description = $description;
 
         return $this;
     }
@@ -192,38 +229,6 @@ class Produits
         return $this;
     }
 
-    private array $images;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description;
 
-    /**
-     * @return array
-     */
-    public function getImages(): array
-    {
-        return $this->images;
-    }
-
-    /**
-     * @param array $images
-     */
-    public function setImages(array $images): void
-    {
-        $this->images = $images;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
 }

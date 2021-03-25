@@ -3,7 +3,7 @@
 {% block body %}
 
     <div id="produit" class="uppercase font-ubuntu font-semibold">
-        <div><a class="float-left" href="{{ path('accueil') }}">⬅️ Retour</a></div><br>
+        <div><a class="float-left animate-bounce" href="{{ path('accueil') }}">⬅️ Retour</a></div><br>
         <img class="w-80 float-left rounded-3xl" src="{{ app.request.uri ~ "/../../img/produits/" ~ produit.image ~ produit.images|first }}" />
         <h1 class="text-2xl">{{ produit.nomproduit }}</h1>
         <h2 class="text-2xl proportional-nums font-mono text-blue-400">{{ produit.prix }}€</h2>
@@ -45,7 +45,10 @@
                 <button type="submit" class="border-solid border-4 border-blue-500 text-blue-500 rounded-xl py-3 px-6 shadow-2xl mt-3 place-self-center">Ajouter au panier</button>
             </div>
         {% endif %}
-        {{ produit.description }}
+        {% if produit.description is not null %}
+            <h1 class="text-2xl text-gray-500">Description</h1>
+            {{ produit.description }}
+        {% endif %}
     </div>
 
 {% endblock %}
