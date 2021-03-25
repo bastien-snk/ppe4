@@ -2,35 +2,43 @@
 
 namespace App\Entity;
 
-use App\Repository\ClientUserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass=ClientUserRepository::class)
+ * ClientUser
+ *
+ * @ORM\Table(name="client_user", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_5C0F152BE7927C74", columns={"email"})})
+ * @ORM\Entity
  */
-class ClientUser implements UserInterface
+class ClientUser
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=180, nullable=false)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="json")
+     * @var json
+     *
+     * @ORM\Column(name="roles", type="json", nullable=false)
      */
-    private $roles = [];
+    private $roles;
 
     /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=255, nullable=false)
      */
     private $password;
 
@@ -51,26 +59,9 @@ class ClientUser implements UserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
+    public function getRoles(): ?array
     {
-        return (string) $this->email;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
     public function setRoles(array $roles): self
@@ -80,12 +71,9 @@ class ClientUser implements UserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
-        return (string) $this->password;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -95,23 +83,5 @@ class ClientUser implements UserInterface
         return $this;
     }
 
-    /**
-     * Returning a salt is only needed, if you are not using a modern
-     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
-     *
-     * @see UserInterface
-     */
-    public function getSalt(): ?string
-    {
-        return null;
-    }
 
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
-    {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
-    }
 }
