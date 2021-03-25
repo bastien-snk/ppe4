@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Ventes
  *
  * @ORM\Table(name="ventes", indexes={@ORM\Index(name="idClient", columns={"idClient"}), @ORM\Index(name="idAgent", columns={"idAgent"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\VentesRepository")
  */
 class Ventes
 {
@@ -38,16 +38,6 @@ class Ventes
     private $chiffreaffaire;
 
     /**
-     * @var \Clients
-     *
-     * @ORM\ManyToOne(targetEntity="Clients")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idClient", referencedColumnName="idClient")
-     * })
-     */
-    private $idclient;
-
-    /**
      * @var \ComptesAgents
      *
      * @ORM\ManyToOne(targetEntity="ComptesAgents")
@@ -56,6 +46,16 @@ class Ventes
      * })
      */
     private $idagent;
+
+    /**
+     * @var \Clients
+     *
+     * @ORM\ManyToOne(targetEntity="Clients")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idClient", referencedColumnName="idClient")
+     * })
+     */
+    private $idclient;
 
     /**
      * @var \Doctrine\Common\Collections\Collection
@@ -101,18 +101,6 @@ class Ventes
         return $this;
     }
 
-    public function getIdclient(): ?Clients
-    {
-        return $this->idclient;
-    }
-
-    public function setIdclient(?Clients $idclient): self
-    {
-        $this->idclient = $idclient;
-
-        return $this;
-    }
-
     public function getIdagent(): ?ComptesAgents
     {
         return $this->idagent;
@@ -121,6 +109,18 @@ class Ventes
     public function setIdagent(?ComptesAgents $idagent): self
     {
         $this->idagent = $idagent;
+
+        return $this;
+    }
+
+    public function getIdclient(): ?Clients
+    {
+        return $this->idclient;
+    }
+
+    public function setIdclient(?Clients $idclient): self
+    {
+        $this->idclient = $idclient;
 
         return $this;
     }
