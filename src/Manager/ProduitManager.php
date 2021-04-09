@@ -28,7 +28,7 @@ class ProduitManager {
     }
 
     public static function getProductsByCategory(Categories $categorie, ProduitRepository $produitRepository): array {
-        $products = $produitRepository->findBy($categorie);
+        $products = $produitRepository->findBy(["idcategorie" => $categorie->getIdcategorie()]);
         return $products;
     }
 
@@ -42,5 +42,4 @@ class ProduitManager {
         $product->setImages($images);
         return $product;
     }
-
 }

@@ -15,7 +15,7 @@
                 <p class="pt-3 pb-5 font-serif font-thin">
                     {{ categorie.description }}
                 </p>
-                <button onclick="{{ path('ca') }}" class="bg-gradient-to-b from-blue-300 to-blue-500 w-6/12 h-10 rounded-3xl shadow-xl mb-5 transition duration-200 ease-out transform hover:-translate-y-1 hover:scale-110">
+                <button onclick="location.href='{{ path('categories_show', {idcategorie: categorie.idcategorie }) }}'" class="ring-0 bg-gradient-to-b from-blue-300 to-blue-500 w-6/12 h-10 rounded-3xl shadow-xl mb-5 transition duration-200 ease-out transform hover:-translate-y-1 hover:scale-110">
                     Voir les produits
                 </button>
             </div>
