@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+// TODO pour tout ce qui gère l'array de produit ajouter "prix" = quantite * prix_unitaire
 class PanierController extends AbstractController
 {
 

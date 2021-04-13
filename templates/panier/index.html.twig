@@ -8,45 +8,47 @@
             <div class="flex-1">
                 <table class="w-full text-sm lg:text-base" cellspacing="0">
                     <thead>
-                    <tr class="h-12 uppercase">
-                        <th class="hidden md:table-cell"></th>
-                        <th class="text-left">Produit</th>
-                        <th class="hidden text-right md:table-cell">Prix unitaire</th>
-                        <th class="text-right">Prix total</th>
-                    </tr>
+                        <tr class="h-12 uppercase">
+                            <th class="hidden md:table-cell"></th>
+                            <th class="text-left">Produit</th>
+                            <th class="hidden text-right md:table-cell">Prix unitaire</th>
+                            <th class="text-right">Prix total</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="hidden pb-4 md:table-cell">
-                            <a href="#">
-                                <img src="https://limg.app/i/Calm-Cormorant-Catholic-Pinball-Blaster-yM4oub.jpeg" class="w-20 rounded" alt="Thumbnail">
-                            </a>
-                        </td>
-                        <td>
-                            <a href="#">
-                                <p class="mb-2 md:ml-4">Earphone</p>
-                            </a>
-                            <a href="#">
-                                <button class="transform hover:-translate-y-1 hover:scale-1 transition duration-500 flex justify-center w-28 px-10 py-3 mt-6 font-medium text-white uppercase bg-gradient-to-r from-blue-800 to-blue-300 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none">
-                                    <span>Supprimer</span>
-                                </button>
-                            </a>
-                        </td>
-                        <td class="justify-center md:justify-end md:flex mt-6">
-                            <div class="w-20 h-10">
-                                <div class="relative flex flex-row w-full h-8">
-                                  <span type="number" value="2" class="apparence-none pt-1 w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" >
-                                    2
+                        {% for produitData in produits %}
+                            <tr>
+                                <td class="hidden pb-4 md:table-cell">
+                                    <a href="#">
+                                        <img src="{{ produitData.produit.image }}" class="w-20 rounded" alt="Thumbnail">
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="#">
+                                        <p class="mb-2 md:ml-4">Earphone</p>
+                                    </a>
+                                    <a href="#">
+                                        <button class="transform hover:-translate-y-1 hover:scale-1 transition duration-500 flex justify-center w-28 px-10 py-3 mt-6 font-medium text-white uppercase bg-gradient-to-r from-blue-800 to-blue-300 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none">
+                                            <span>Supprimer</span>
+                                        </button>
+                                    </a>
+                                </td>
+                                <td class="justify-center md:justify-end md:flex mt-6">
+                                    <div class="w-20 h-10">
+                                        <div class="relative flex flex-row w-full h-8">
+                                          <span type="number" value="2" class="apparence-none pt-1 w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" >
+                                            {{ produitData.quantite }}
+                                          </span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-right">
+                                  <span class="text-sm lg:text-base font-medium">
+                                    {{ produit.prix }}
                                   </span>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="text-right">
-                          <span class="text-sm lg:text-base font-medium">
-                            20.00€
-                          </span>
-                        </td>
-                    </tr>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
                 <hr class="pb-6 mt-6">
@@ -61,7 +63,7 @@
                     </div>
                 </div>
                 <div>
-                    <a href="#">
+                    <a href="{{ path('checkout') }}">
                         <button class="transform hover:-translate-y-1 transition duration-500 flex justify-center w-full px-10 py-3 mt-6 font-medium text-white uppercase bg-gradient-to-r from-blue-800 to-blue-300 rounded-full shadow item-center focus:shadow-outline focus:outline-none">
                             <svg aria-hidden="true" data-prefix="far" data-icon="credit-card" class="w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M527.9 32H48.1C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48.1 48h479.8c26.6 0 48.1-21.5 48.1-48V80c0-26.5-21.5-48-48.1-48zM54.1 80h467.8c3.3 0 6 2.7 6 6v42H48.1V86c0-3.3 2.7-6 6-6zm467.8 352H54.1c-3.3 0-6-2.7-6-6V256h479.8v170c0 3.3-2.7 6-6 6zM192 332v40c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v40c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12z"/></svg>
                             <span class="ml-2 mt-5px">Payer</span>

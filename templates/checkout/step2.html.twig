@@ -1,0 +1,58 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block body %}
+    <div class="flex justify-center my-6">
+        <div class="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg pin-r pin-y md:w-4/5 lg:w-4/5">
+            <div class="uppercase font-ubuntu font-semibold text-center pb-4 text-lg">
+                Checkout
+            </div>
+            <div id="progress-bar" class="flex-1 self-center">
+                <a href="{{ path('panier') }}">
+                    <div id="circle-0" class="bg-blue-500 hover:bg-blue-700 w-7 h-7 rounded-full inline-block -mr-2 sticky transform hover:-translate-y-1 transition duration-500 hover:scale-110"></div>
+                </a>
+                <div id="line-0" class="bg-blue-500 w-16 h-2 inline-block align-text-top -mr-2"></div>
+                <div id="circle-1" class="bg-blue-500 w-7 h-7 rounded-full inline-block -mr-2 sticky"></div>
+                <div id="line-1" class="bg-gray-300 w-16 h-2 inline-block align-text-top -mr-2"></div>
+                <div id="circle-2" class="bg-gray-300 w-7 h-7 rounded-full inline-block -mr-2 sticky"></div>
+                <div id="line-2" class="bg-gray-300 w-16 h-2 inline-block align-text-top -mr-2"></div>
+                <div id="circle-3" class="bg-blue-500 hover:bg-blue-700 w-7 h-7 rounded-full inline-block -mr-2 m-auto sticky transform hover:-translate-y-1 transition duration-500 hover:scale-110">
+                    <div class="text-center my-1 mx-1 w-full">
+                        <svg width="70%" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="check" class="svg-inline--fa fa-check fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="white" d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"></path></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mode-livraison" class="font-ubuntu font-semibold text-lg">
+                <span class="uppercase">Mode de livraison</span>
+                <div id="livraison-radio-button">
+                    <div class="inline-grid font-normal">
+              <span>
+                <input type="radio" id="huey" name="drone" value="Chonopost" checked>
+                <label for="huey">Chronopost</label>
+              </span>
+                        <span>
+                <input type="radio" id="huey" name="drone" value="Chonopost">
+                <label for="huey">Colissimo</label>
+              </span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="buttons-etape" class="font-ubuntu font-semibold text-lg text-center">
+                <a href="{{ path('panier') }}">
+                    <button id="previous" class="focus:outline-none transform hover:-translate-x-3 transition duration-700 bg-gray-300 text-gray-700 font-medium uppercase w-5/12 px-10 py-3 mt-6 rounded-full">
+                        Étape précédente
+                    </button>
+                </a>
+                <a href="{{ path('checkout-step3') }}">
+                    <button id="previous" class="focus:outline-none transform hover:translate-x-3 transition duration-700 bg-gradient-to-r from-blue-800 to-blue-300 text-white font-medium uppercase w-5/12 px-10 py-3 mt-6 rounded-full">
+                        Étape suivante
+                    </button>
+                </a>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
