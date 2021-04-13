@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Perpi&Co{% endblock %}</title>
+        <title>{% block title %}{% endblock %} - VapeShop</title>
         <link rel="icon" type="image/png" href="logo.png" />
         {% block head_css %}
             <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
@@ -21,7 +21,7 @@
             <div class="mx-auto space-x-9 justify-center container mx-auto p-4 flex flex-wrap md:flex-no-wrap">
                 <span class=" hover:text-blue-500"><a href="{{ path("accueil") }}">🏠 Accueil</a></span>
                 <span class=" hover:text-blue-500"><a href="{{ path("produits_index") }}">🛍️ Produits</a></span>
-                <span class=" hover:text-blue-500"><a href="">🛒 Panier</a></span>
+                <span class=" hover:text-blue-500"><a href="{{ path("panier") }}">🛒 Panier</a></span>
                 <span class=" hover:text-blue-500"><a href="{{ path("app_login") }}">🔒 Connexion</a></span>
             </div>
         </nav>
