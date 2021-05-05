@@ -2,53 +2,55 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-Le logiciel Perpi&Co est un logiciel développé en Java 8 qui permettra à votre entreprise de gérer son système de vente de manière instantanée et de pouvoir effectuer des ventes au près des clients.
-
-### Nouveaux ajouts 🏷️
-
-  - Ajout de la Javadoc, tout nos fichiers sont désormais commentés pour que vous puissez les éditer et nous proposer des forks ! ⌨️
-  - Génération des factures de ventes en fichier PDF 💴
-  - Ajout de la première pre-release du logiciel pour l'adapter dans vos entreprises ! ⚙️
+Le Site Web de Perpi&Co est développé en Php 7 avec Symfony qui permettra de gérer son système de vente et de clients de manière instantanée et de pouvoir permettre au clients de passer leurs commandes.
 
 ### Pré-requis ⚠️
 
 Pour pouvoir éditer le logiciel, vous devrez disposer des ressources suivantes:
 
 * [IDE] - Un environnement de développement integré pour pouvoir visualiser, éditer et compiler le logiciel 🚇
-* [Development Kit] - Kit de développement de Java en version 1.8 ♨️
-* [Maven] - Outil de gestion et d'automatisation de production des projets logiciels en Java 🌊
+* [PHP] - Intérpréteur PHP >= 7.1 ♨️
 * [Swing] - Bibliothèque graphique de Java 📚
-* [SQL] - Un serveur de Base de données (PhpMyAdmin) ainsi que le language de requêtes SQL (MySQL) installés 📚
+* [MariaDB] - Un UI de SGBD (PhpMyAdmin) ainsi que le serveur de requêtes SQL (MariaDB) installés 📚
+* [Docker] - Le logiciel libre Docker installé avec un container capable d'éxécuter un projet Symfony 📚
 
 ### Installation 📁
 
-Pour installer le JAR, il suffit de cloner le repository et d'ouvrir le fichier:
+Pour installer le projet, il suffit de cloner le repository et d'ouvrir le fichier:
 
 ```sh
-mkdir PPE3
-cd PPE3
-git clone https://github.com/rootxls/PPE.git
+mkdir PPE4
+cd PPE4
+git clone https://github.com/rootxls/PPE4.git
 ```
 
-Pour que le logiciel soit fonctionnel, il vous faut installer MySQL et PHPMyAdmin, il est possible de les installer grâce à WAMP (Windows), pour les utilisateurs de Linux voici un tutoriel: http://elisabeth.pointal.org/doc/code/server/lamp/phpmyadmin
+Pour que le site soit fonctionnel, il vous installer Docker, puis les images MariaDB et PhpMyAdmin. Ensuite vous pouvez installer une image Symfony ou alors directement installer cette image: https://github.com/cnadal/machine_docker
 
 Il vous faudra ensuite installer la base de données du logiciel:
  - Connectez vous sur PHPMyAdmin
  - Allez sur la page Importer
  - Cliquez sur choisir un fichier (cela vous ouvre un Explorateur de fichiers)
- - Rendez-vous dans le dossier PPE3 que nous avons fait auparavant
- - Séléctionnez le fichier PPE3.sql
+ - Rendez-vous dans le dossier PPE4 que nous avons fait auparavant
+ - Séléctionnez le fichier database.sql
  - Cliquez sur le boutton "Go"
  
- Ensuite, ouvrez le projet sur votre IDE, et maintenant, modifiez les informations de connexion au serveur MySQL (DataAccessObject.java), vous devrez changer:
+ Ensuite, ouvrez le projet sur votre IDE, et maintenant, modifiez les informations de connexion au serveur MySQL dans le fichier de configuration .env à la racine du projet, vous devrez changer:
  
+ - Les identifiants de connexion (username:password)
  - L'IP par celle de votre serveur
  - Le port par celui que vous utilisez (si vous avez modifié le port de MySQL)
- - Les identifiants de connexion (username:password)
  
- En dernier temps, vous devrez accéder au FactureManager et modifier le chemin de sauvegarde des factures.
- 
+Il vous faudra ensuite installer toutes les dépendances du projet Symfony, pour ceci éxecutez le container Symfony ou est mis le projet:
+
+```bash
+docker exec -it <nom-container> bash
+cd PPE4
+composer install
+composer update
+```
+
+Une fois ceci fait, il ne vous manque plus qu'à accéder au site avec le lien suivant: http://ip_machine:port_container/PPE4/public/
+
 ### Documentation ✏️
 
-  - 📖 Documentation (développeurs & administrateurs) - https://docs.google.com/document/d/1pU1T9iv3ZP5yI126A3Z7TMTweKYT6JHhjVJc9FrccGs/edit?usp=sharing
-  - 📖 Documentation (utilisateurs) - https://docs.google.com/document/d/1d3BfzXZf-edxrizproyTgFypcrfB59D74jVE4QkD7Qs/edit?usp=sharing
+  - 📖 Documentation (développeurs & administrateurs) - https://docs.google.com/document/d/1p_BI_sQTLphM286gxch9M-35HY_xzpS1tuJ4piLOR4c/edit?usp=sharing
