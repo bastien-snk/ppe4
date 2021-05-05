@@ -10,9 +10,8 @@ Pour pouvoir éditer le logiciel, vous devrez disposer des ressources suivantes:
 
 * [IDE] - Un environnement de développement integré pour pouvoir visualiser, éditer et compiler le logiciel 🚇
 * [PHP] - Intérpréteur PHP >= 7.1 ♨️
-* [Swing] - Bibliothèque graphique de Java 📚
-* [MariaDB] - Un UI de SGBD (PhpMyAdmin) ainsi que le serveur de requêtes SQL (MariaDB) installés 📚
-* [Docker] - Le logiciel libre Docker installé avec un container capable d'éxécuter un projet Symfony 📚
+* [MariaDB] - Un UI de SGBD (PhpMyAdmin) ainsi que le serveur de requêtes SQL (MariaDB) installés 🐬
+* [Docker] - Le logiciel libre Docker installé avec un container capable d'éxécuter un projet Symfony 🐳
 
 ### Installation 📁
 
