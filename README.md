@@ -1,4 +1,4 @@
-# PPE3 - BTS SIO - Logiciel de vente
+# PPE4 - BTS SIO - Site marchand
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
