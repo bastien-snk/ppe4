@@ -1,6 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Panier{% endblock %}
+{% include 'base.html.twig' %}
 
 {% block body %}
     <div class="flex justify-center my-6">
@@ -20,31 +18,35 @@
                             <tr>
                                 <td class="hidden pb-4 md:table-cell">
                                     <a href="#">
-                                        <img src="{{ produitData.produit.image }}" class="w-20 rounded" alt="Thumbnail">
+                                        <img src="{{ app.request.uri ~ "/../img/produits/" ~ produitData.produit.image }}" class="w-20 rounded">
                                     </a>
                                 </td>
                                 <td>
                                     <a href="#">
-                                        <p class="mb-2 md:ml-4">Earphone</p>
+                                        <p class="mb-2 md:ml-4">{{ produitData.produit.nomProduit }}</p>
                                     </a>
                                     <a href="#">
-                                        <button class="transform hover:-translate-y-1 hover:scale-1 transition duration-500 flex justify-center w-28 px-10 py-3 mt-6 font-medium text-white uppercase bg-gradient-to-r from-blue-800 to-blue-300 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none">
+                                        <button onclick="location.href='{{ path("panier_remove", {'id': produitData.produit.idproduit}) }}'" class="transform hover:-translate-y-1 hover:scale-1 transition duration-500 flex justify-center w-28 px-10 py-3 mt-6 font-medium text-white uppercase bg-gradient-to-r from-blue-800 to-blue-300 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none">
                                             <span>Supprimer</span>
                                         </button>
                                     </a>
                                 </td>
                                 <td class="justify-center md:justify-end md:flex mt-6">
                                     <div class="w-20 h-10">
-                                        <div class="relative flex flex-row w-full h-8">
+                                        {#<div class="relative flex flex-row w-full h-8">
                                           <span type="number" value="2" class="apparence-none pt-1 w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" >
                                             {{ produitData.quantite }}
                                           </span>
+                                        </div>#}
+
+                                        <div class="relative flex flex-row w-full h-8 ">
+                                            <input class="w-16 h-10 apparence-none pt-1 w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" type="number" id="tentacles" name="tentacles" value="{{ produitData.quantite }}" min="1" max="100">
                                         </div>
                                     </div>
                                 </td>
                                 <td class="text-right">
                                   <span class="text-sm lg:text-base font-medium">
-                                    {{ produit.prix }}
+                                    {{ produitData.produit.prix * produitData.quantite }}€
                                   </span>
                                 </td>
                             </tr>

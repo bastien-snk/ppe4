@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Produits;
+use App\Manager\PanierManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CheckoutController extends AbstractController
@@ -18,11 +22,35 @@ class CheckoutController extends AbstractController
     }
 
     /**
+     * @Route("/checkout", name="checkout_add")
+     */
+    public function add(Request $request, SessionInterface $session, Produits $produit): Response
+    {
+        $produits = $session->get("panier");
+
+        if($produits == null) {
+            $this->redirectToRoute("panier_create");
+        }
+
+        if(isset($produits[$produit->getIdproduit()])) {
+            $produits[$produit->getIdproduit()]["quantite"]++;
+        } else {
+            $produits[$produit->getIdproduit()] = array("quantite" => 1, "produit" => $produit);
+        }
+
+        return $this->redirectToLastRoute($request);
+
+        return $this->render('checkout/step2.html.twig', [
+        ]);
+    }
+
+    /**
      * @Route("/checkout/3", name="checkout-step3")
      */
-    public function step3(): Response
+    public function step3(SessionInterface $session): Response
     {
         return $this->render('checkout/step3.html.twig', [
+            "prix_total" => PanierManager::getTotalPrice($session->get("panier")),
         ]);
     }
 

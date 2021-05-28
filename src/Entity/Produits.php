@@ -76,21 +76,6 @@ class Produits
     public $idcategorie;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Ventes", inversedBy="idproduit")
-     * @ORM\JoinTable(name="comporter",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="idProduit", referencedColumnName="idProduit")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="idVente", referencedColumnName="idVente")
-     *   }
-     * )
-     */
-    public $idvente;
-
-    /**
      * Constructor
      */
     public function __construct()
@@ -204,31 +189,4 @@ class Produits
 
         return $this;
     }
-
-    /**
-     * @return Collection|Ventes[]
-     */
-    public function getIdvente(): Collection
-    {
-        return $this->idvente;
-    }
-
-    public function addIdvente(Ventes $idvente): self
-    {
-        if (!$this->idvente->contains($idvente)) {
-            $this->idvente[] = $idvente;
-        }
-
-        return $this;
-    }
-
-    public function removeIdvente(Ventes $idvente): self
-    {
-        $this->idvente->removeElement($idvente);
-
-        return $this;
-    }
-
-
-
 }

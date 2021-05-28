@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Produits;
 use App\Manager\PanierManager;
-use http\Env\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,6 +37,7 @@ class PanierController extends AbstractController
      */
     public function create(Request $request, SessionInterface $session): Response {
         $session->set("panier", []);
+        $session->save();
         return $this->redirectToRoute("panier");
     }
 
@@ -69,6 +70,29 @@ class PanierController extends AbstractController
             $produits[$produit->getIdproduit()] = array("quantite" => 1, "produit" => $produit);
         }
 
+        $session->set("panier", $produits);
+        return $this->redirectToLastRoute($request);
+    }
+
+    /**
+     * @Route("/panier/rmq/{id}", name="panier_removeQuantity")
+     * @param Request $request
+     * @return Response
+     */
+    public function removeOne(Request $request, SessionInterface $session, Produits $produit): Response {
+        $produits = $session->get("panier");
+
+        if($produits == null) {
+            $this->redirectToRoute("panier_create");
+        }
+
+        if(isset($produits[$produit->getIdproduit()])) {
+            $produits[$produit->getIdproduit()]["quantite"]--;
+        } else {
+            $produits[$produit->getIdproduit()] = array("quantite" => 1, "produit" => $produit);
+        }
+
+        $session->set("panier", $produits);
         return $this->redirectToLastRoute($request);
     }
 
@@ -87,15 +111,15 @@ class PanierController extends AbstractController
         }
 
         if(isset($produits[$produit->getIdproduit()])) {
-            $produits[$produit->getIdproduit()]["quantite"]++;
-        } else {
-            $produits[$produit->getIdproduit()] = array("quantite" => 1, "produit" => $produit);
+            unset($produits[$produit->getIdproduit()]);
+            $session->set("panier", $produits);
+            /*$produits[$produit->getIdproduit()]["quantite"]++;*/
         }
 
         return $this->redirectToLastRoute($request);
     }
 
     public function redirectToLastRoute(Request $request) {
-        $this->redirect($request->server->get('HTTP_REFERER'));
+        return $this->redirect($request->server->get('HTTP_REFERER'));
     }
 }

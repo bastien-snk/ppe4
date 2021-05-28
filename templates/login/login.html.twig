@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<body class="">
+<div id="global" class="h-full w-full bg-gray-100 py-72">
+    <div id="form" class="py-16 mx-auto my-auto text-center bg-white w-96 shadow-inner">
+        <div>
+            <a href="{{ path("accueil") }}"><img src="../public/img/logo.jpg" class="w-20 items-center mx-auto pb-10" /></a>
+        </div>
+        <form method="post" class="items-center justify-self-center antialiased">
+            <div class="uppercase font-ubuntu font-semibold">
+                <label>📧 E - Mail</label>
+            </div>
+
+            <input value="{{ last_username }}" name="email" id="inputEmail" required autofocus class="focus:outline-none shadow-lg border-4 bg-gradient-to-r border-r-4 border-blue-400 px-2 w-60" type="email" placeholder="Entrez votre email" />
+            <div class="pt-4 uppercase font-ubuntu font-semibold"><label>🈴 Mot de passe</label></div>
+            <input name="password" id="inputPassword"  class="focus:outline-none shadow-lg border-4 bg-gradient-to-r border-r-4 border-blue-400 px-2 w-60" type="password" placeholder="Entrez votre mot de passe" />
+            <div class="pt-2">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <button type="submit" class="bg-gradient-to-r from-blue-300 to-blue-500 border-0 rounded-xl py-3 px-6 shadow-2xl mt-3 hover:bg-gradient-to-r hover='from-blue-500 to-light-blue-300' place-self-center">🔒 Se connecter</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+{% endblock %}

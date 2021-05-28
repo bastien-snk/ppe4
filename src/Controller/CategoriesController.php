@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Categories;
 use App\Form\CategoriesType;
+use App\Manager\CategoriesManager;
+use App\Manager\ProduitManager;
 use App\Repository\CategorieRepository;
+use App\Repository\ProduitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,10 +54,11 @@ class CategoriesController extends AbstractController
     /**
      * @Route("/{idcategorie}", name="categories_show", methods={"GET"})
      */
-    public function show(Categories $category): Response
+    public function show(Categories $category, ProduitRepository $produitRepository): Response
     {
         return $this->render('categories/show.html.twig', [
             'category' => $category,
+            "produits" => ProduitManager::getProducts($produitRepository),
         ]);
     }
 

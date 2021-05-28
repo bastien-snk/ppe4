@@ -41,8 +41,8 @@
 
         {% if produit.quantite > 0 %}
             <div class="block">
-                <button type="submit" class="bg-gradient-to-r from-blue-300 to-blue-500 border-0 rounded-xl py-4 px-6 shadow-2xl mt-3 hover:bg-gradient-to-r hover='from-blue-500 to-light-blue-300' place-self-center">Acheter maintenant</button>
-                <button type="submit" class="border-solid border-4 border-blue-500 text-blue-500 rounded-xl py-3 px-6 shadow-2xl mt-3 place-self-center">Ajouter au panier</button>
+                <button onclick="location.href='{{ path("checkout_add") }}'" type="submit" class="bg-gradient-to-r from-blue-300 to-blue-500 border-0 rounded-xl py-4 px-6 shadow-2xl mt-3 hover:bg-gradient-to-r hover='from-blue-500 to-light-blue-300' place-self-center">Acheter maintenant</button>
+                <button onclick="location.href='{{ path("panier_add", {'id': produit.idproduit}) }}'" type="submit" class="border-solid border-4 border-blue-500 text-blue-500 rounded-xl py-3 px-6 shadow-2xl mt-3 place-self-center">Ajouter au panier</button>
             </div>
         {% endif %}
         {% if produit.description is not null %}

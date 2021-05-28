@@ -1,4 +1,26 @@
-{% extends "base.html.twig" %}
+{% include "base.html.twig" %}
+
+{% block javascripts %}
+    <script src="https://www.paypal.com/sdk/js?client-id=test"></script>
+    <script>
+        paypal.Buttons({
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: {{ prix_total }}
+                        }
+                    }]
+                });
+            },
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (details) {
+                    alert("Transaction effectuée" + details.payer.name.given_name);
+                });
+            }
+        }).render("body");
+    </script>
+{% endblock %}
 
 {% block body %}
 <div class="flex justify-center my-6">
